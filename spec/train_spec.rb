@@ -18,5 +18,11 @@ describe Train do
     end
   end
 
+  describe '.all' do
+    it 'returns an empty array at first' do
+      expect(Train.all).to eq []
+    end
+  end
+
 
 end
