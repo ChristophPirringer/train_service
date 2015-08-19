@@ -27,4 +27,15 @@ class City
     self.id == another_city.id
   end
 
+  def self.find (city_id)
+    found_city = nil
+    returned_cities = DB.exec("SELECT * FROM cities WHERE id = #{city_id};")
+    returned_cities.each() do |city|
+      if city['id'].to_i == city_id
+        found_city = City.new({id: city['id'], name: city['name']})
+      end
+    end
+    found_city
+  end
+
 end

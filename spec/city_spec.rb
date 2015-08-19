@@ -38,4 +38,11 @@ describe City do
     end
   end
 
+  describe ".find" do
+    it 'returns a city when that city id is passed in' do
+      @city.save
+      expect(City.find(@city.id)).to eq @city
+    end
+  end
+
 end
