@@ -62,7 +62,25 @@ describe 'train system path', { type: :feature } do
     visit '/trains'
     click_link 'edit'
     click_button 'Delete Train'
-    expect(page).to have_no_content 'Portland'
+    expect(page).to have_no_content 'The_City_Of_New_Orleans'
   end
 
+  it "allows user to rename a new city and see the renamed entry" do
+    @city = City.new({ id: nil, name: 'The_City_Of_New_Orleans' })
+    @city.save
+    visit '/cities'
+    click_link 'edit'
+    fill_in 'name', with: 'Portland'
+    click_button 'Update'
+    expect(page).to have_content 'Portland'
+  end
+
+  it "allows user to delete a city and see the lack of an entry" do
+    @city = City.new({ id: nil, name: 'The_City_Of_New_Orleans' })
+    @city.save
+    visit '/cities'
+    click_link 'edit'
+    click_button 'Delete City'
+    expect(page).to have_no_content 'The_City_Of_New_Orleans'
+  end
 end
