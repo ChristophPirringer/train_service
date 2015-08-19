@@ -88,8 +88,6 @@ end
 
 post '/city_trains' do
   @city = City.find(params['id'].to_i)
-	binding.pry
 	@city.update({train_ids: [params['train_id']]})
-	@trains = Train.all
-	erb(:city)
+	redirect("city/#{@city.id}")
 end
