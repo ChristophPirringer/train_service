@@ -45,5 +45,13 @@ describe Train do
     end
   end
 
+  describe '#update' do
+    it 'it returns train with new name' do
+      @train.save
+      @train.update({name: 'Blain'})
+      expect(@train.name).to eq "Blain"
+    end
+  end
+
 
 end
