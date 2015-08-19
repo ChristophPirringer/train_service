@@ -44,5 +44,21 @@ describe City do
       expect(City.find(@city.id)).to eq @city
     end
   end
+  describe '#update' do
+    it 'it returns city with new name' do
+      @city.save
+      @city.update({name: 'Blain'})
+      expect(@city.name).to eq "Blain"
+    end
+  end
+
+  describe '#destroy' do
+    it 'it removes city from the database' do
+      @city.save
+      @city.destroy
+      @cities = City.all
+      expect(@cities.include?(@city)).to eq false
+    end
+  end
 
 end
