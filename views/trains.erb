@@ -1,0 +1,16 @@
+
+
+<% if @trains.any? %>
+  <ul>
+    <% @trains.each do |train| %>
+      <li><%= train.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>
+    There are no trains, add one.
+  </p>
+<% end %>
+
+<a href="/trains/new">Add Train</a>
+<a href="/">Back</a>

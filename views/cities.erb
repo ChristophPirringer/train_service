@@ -1,0 +1,16 @@
+
+
+<% if @cities.any? %>
+  <ul>
+    <% @cities.each do |city| %>
+      <li><a href="/city/<%= city.id %>"><%= city.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>
+    There are no cities, add one.
+  </p>
+<% end %>
+
+<a href="/cities/new">Add City</a>
+<a href="/">Back</a>
