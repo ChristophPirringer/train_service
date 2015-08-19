@@ -53,5 +53,14 @@ describe Train do
     end
   end
 
+  describe '#destroy' do
+    it 'it removes train from the database' do
+      @train.save
+      @train.destroy
+      @trains = Train.all
+      expect(@trains.include?(@train)).to eq false
+    end
+  end
+
 
 end
