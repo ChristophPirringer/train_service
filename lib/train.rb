@@ -16,5 +16,14 @@ class Train
     end
     trains
   end
-  
+
+  def save
+    result = DB.exec("INSERT INTO trains (id, name) VALUES (#{self.id}, '#{self.name}') RETURNING id;")
+    @id = result.first.fetch('id').to_i
+  end
+
+  def == (another_train)
+    another_train.id == self.id &&
+    another_train.name == self.name
+  end
 end

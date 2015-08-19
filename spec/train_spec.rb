@@ -24,5 +24,19 @@ describe Train do
     end
   end
 
+  describe '#save' do
+    it 'saves a train and returns an array with it' do
+      @train.save
+      expect(Train.all).to eq [@train]
+    end
+  end
+
+  describe "#==" do
+    it 'returns true when trains have the same attributes' do
+      train2 = Train.new({ id: nil, name: "City_Of_New_Orleans"})
+      expect(@train).to eq train2
+    end
+  end
+
 
 end
