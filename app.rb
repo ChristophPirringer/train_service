@@ -71,6 +71,7 @@ get '/train/:id' do
 end
 
 get '/city/:id' do
+	@trains = Train.all
 	@city = City.find(params['id'].to_i)
 	erb(:city)
 end
@@ -83,4 +84,12 @@ end
 get '/train/:id/edit' do
 	@train = Train.find(params['id'].to_i)
 	erb(:train_edit)
+end
+
+post '/city_trains' do
+  @city = City.find(params['id'].to_i)
+	binding.pry
+	@city.update({train_ids: [params['train_id']]})
+	@trains = Train.all
+	erb(:city)
 end

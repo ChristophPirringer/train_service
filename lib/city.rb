@@ -1,4 +1,4 @@
-require('train')
+require('./lib/train')
 
 class City
   attr_reader :id, :name
