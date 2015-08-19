@@ -18,7 +18,7 @@ class Train
   end
 
   def save
-    result = DB.exec("INSERT INTO trains (id, name) VALUES (#{self.id}, '#{self.name}') RETURNING id;")
+    result = DB.exec("INSERT INTO trains (name) VALUES ('#{self.name}') RETURNING id;")
     @id = result.first.fetch('id').to_i
   end
 
@@ -26,4 +26,16 @@ class Train
     another_train.id == self.id &&
     another_train.name == self.name
   end
+
+  def self.find(train_id)
+    found_train = nil
+    returned_trains = DB.exec("SELECT * FROM trains WHERE id = #{train_id};")
+    returned_trains.each do |train|
+      if train['id'].to_i == train_id
+        found_train = Train.new({name: train['name'], id: train['id']})
+      end
+    end
+    found_train
+  end
+
 end

@@ -38,5 +38,12 @@ describe Train do
     end
   end
 
+  describe '.find' do
+    it 'returns a train based on passed in id' do
+      @train.save
+      expect(Train.find(@train.id)).to eq @train
+    end
+  end
+
 
 end

@@ -1,6 +1,7 @@
 require 'rspec'
 require './lib/train'
 require 'pg'
+require 'pry'
 
 DB = PG.connect({ dbname: 'train_system_test' })
 
