@@ -3,7 +3,7 @@
 <% if @trains.any? %>
   <ul>
     <% @trains.each do |train| %>
-      <li><%= train.name %></li>
+      <li><a href="/train/<%= train.id %>"><%= train.name %></a></li>
     <% end %>
   </ul>
 <% else %>

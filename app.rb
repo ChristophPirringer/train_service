@@ -41,6 +41,7 @@ get '/cities/new' do
 end
 
 get '/train/:id' do
+	@train = Train.find(params['id'].to_i)
 	erb(:train)
 end
 
