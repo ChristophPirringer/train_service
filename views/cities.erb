@@ -3,7 +3,7 @@
 <% if @cities.any? %>
   <ul>
     <% @cities.each do |city| %>
-      <li><a href="/city/<%= city.id %>"><%= city.name %></a></li>
+      <li><a href="/city/<%= city.id %>"><%= city.name %></a> <a href="/city/<%= city.id %>/edit">edit</a></li>
     <% end %>
   </ul>
 <% else %>

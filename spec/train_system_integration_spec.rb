@@ -46,4 +46,23 @@ describe 'train system path', { type: :feature } do
     expect(page).to have_content 'we exist'
   end
 
+  it "allows user to rename a new train and see the renamed entry" do
+    @train = Train.new({ id: nil, name: 'The_City_Of_New_Orleans' })
+    @train.save
+    visit '/trains'
+    click_link 'edit'
+    fill_in 'name', with: 'Portland'
+    click_button 'Update'
+    expect(page).to have_content 'Portland'
+  end
+
+  it "allows user to delete a train and see the lack of an entry" do
+    @train = Train.new({ id: nil, name: 'The_City_Of_New_Orleans' })
+    @train.save
+    visit '/trains'
+    click_link 'edit'
+    click_button 'Delete Train'
+    expect(page).to have_no_content 'Portland'
+  end
+
 end

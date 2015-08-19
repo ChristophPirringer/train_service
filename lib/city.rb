@@ -6,6 +6,16 @@ class City
     @id = attributes[:id].to_i
   end
 
+  def update(attributes)
+    @name = attributes[:name]
+    @id = self.id
+    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
+  def destroy
+    DB.exec("DELETE FROM cities WHERE id = #{self.id};")
+  end
+
   def self.all
     returned_citiess = DB.exec("SELECT * FROM cities")
     cities = []
@@ -38,14 +48,6 @@ class City
     found_city
   end
 
-  def update(attributes)
-    @name = attributes[:name]
-    @id = self.id
-    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
-  end
 
-  def destroy
-    DB.exec("DELETE FROM cities WHERE id = #{self.id};")
-  end
 
 end
