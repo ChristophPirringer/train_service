@@ -50,6 +50,16 @@ describe City do
       @city.update({name: 'Blain'})
       expect(@city.name).to eq "Blain"
     end
+
+    it 'lets you add a train to trains_cities' do
+      @city.save
+      train = Train.new({ id: nil, name: 'Blain'})
+      train.save
+      train2 = Train.new({ id: nil, name: "Ted"})
+      train2.save
+      @city.update({ train_ids: [train.id, train2.id] })
+      expect(@city.trains).to eq [train, train2]
+    end
   end
 
   describe '#destroy' do
@@ -60,5 +70,19 @@ describe City do
       expect(@cities.include?(@city)).to eq false
     end
   end
+
+  describe "#trains" do
+    it 'returns all of the trains associated with the city' do
+      @city.save
+      train = Train.new({ id: nil, name: 'Blain'})
+      train.save
+      train2 = Train.new({ id: nil, name: "Ted"})
+      train2.save
+      @city.update({ train_ids: [train.id, train2.id] })
+      expect(@city.trains).to eq [train, train2]
+    end
+  end
+
+
 
 end

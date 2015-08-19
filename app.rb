@@ -53,7 +53,7 @@ end
 
 patch '/train/:id' do
 	@train = Train.find(params['id'].to_i)
-	@train.update(params)
+	@train.update({name: params['name']})
 	redirect(:trains)
 end
 

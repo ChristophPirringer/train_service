@@ -1,3 +1,5 @@
+require('train')
+
 class City
   attr_reader :id, :name
 
@@ -7,9 +9,13 @@ class City
   end
 
   def update(attributes)
-    @name = attributes[:name]
-    @id = self.id
-    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
+    @name = attributes.fetch(:name, @name)
+
+    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{self.id};")
+
+    attributes.fetch(:train_ids, []).each() do |train_id|
+      DB.exec("INSERT INTO trains_cities (city_id, train_id) VALUES (#{self.id}, #{train_id});")
+    end
   end
 
   def destroy
@@ -46,6 +52,18 @@ class City
       end
     end
     found_city
+  end
+
+  def trains
+    city_trains = []
+    results = DB.exec("SELECT train_id FROM trains_cities WHERE city_id = #{self.id}")
+    results.each do |result|
+      train_id = result['train_id'].to_i
+      train = DB.exec("SELECT * FROM trains WHERE id = #{train_id}")
+      name = train.first.fetch('name')
+      city_trains.push(Train.new({ name: name, id: train_id}))
+    end
+    city_trains
   end
 
 
