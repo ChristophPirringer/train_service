@@ -24,4 +24,18 @@ describe City do
     end
   end
 
+  describe "#save" do
+    it 'saves the city' do
+      @city.save
+      expect(City.all).to eq [@city]
+    end
+  end
+
+  describe "#==" do
+    it 'returns true when all attributes are the same' do
+      city2 = City.new({ id: nil, name: "New_Orleans"})
+      expect(@city).to eq city2
+    end
+  end
+
 end

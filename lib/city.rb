@@ -17,4 +17,14 @@ class City
     cities
   end
 
+  def save
+    result = DB.exec("INSERT INTO cities (name) VALUES ('#{self.name}') RETURNING id;")
+    @id = result.first.fetch('id').to_i
+  end
+
+  def == (another_city)
+    self.name == another_city.name &&
+    self.id == another_city.id
+  end
+
 end
