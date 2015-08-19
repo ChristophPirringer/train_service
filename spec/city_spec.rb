@@ -12,4 +12,16 @@ describe City do
     end
   end
 
+  describe '#name' do
+    it "returns the city's name" do
+      expect(@city.name).to eq "New_Orleans"
+    end
+  end
+
+  describe ".all" do
+    it 'returns an empty array at first' do
+      expect(City.all).to eq []
+    end
+  end
+
 end
