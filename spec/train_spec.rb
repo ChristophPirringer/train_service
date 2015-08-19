@@ -51,6 +51,29 @@ describe Train do
       @train.update({name: 'Blain'})
       expect(@train.name).to eq "Blain"
     end
+
+    it 'lets you add a train to trains_cities' do
+      @train.save
+      city2 = City.new({ id: nil, name: "Chicago"})
+      city2.save
+      city = City.new({ id: nil, name: 'Portland'})
+      city.save
+      @train.update({city_ids: [city.id, city2.id] })
+      expect(@train.cities).to eq [city, city2]
+    end
+  end
+
+  describe("#cities") do
+    it("returns all of the cities in which a particular train stops") do
+      train = Train.new({:name => "Oceans Eleven", :id => nil})
+      train.save()
+      george = City.new({:name => "George Clooney", :id => nil})
+      george.save()
+      brad = City.new({:name => "Brad Pitt", :id => nil})
+      brad.save()
+      train.update({:city_ids => [george.id(), brad.id()]})
+      expect(train.cities()).to(eq([george, brad]))
+    end
   end
 
   describe '#destroy' do
@@ -61,6 +84,7 @@ describe Train do
       expect(@trains.include?(@train)).to eq false
     end
   end
+
 
 
 end

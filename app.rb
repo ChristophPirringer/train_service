@@ -41,7 +41,7 @@ end
 
 patch '/city/:id' do
 	@city = City.find(params['id'].to_i)
-	@city.update(params)
+	@city.update({name: params['name']})
 	redirect(:cities)
 end
 
