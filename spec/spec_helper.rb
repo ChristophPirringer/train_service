@@ -1,5 +1,6 @@
 require 'rspec'
 require './lib/train'
+require './lib/city'
 require 'pg'
 require 'pry'
 
