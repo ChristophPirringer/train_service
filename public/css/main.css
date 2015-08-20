@@ -4,6 +4,9 @@
     #fff url('http://www.westernrailinc.com/monochrome-railroad-tracks.jpg') no-repeat center;
     background-size: cover;
 }
+body{
+  background:none;
+}
 
 #main-page{
   padding-top: 170px;
@@ -32,4 +35,17 @@ ul {
 li {
   margin: 0 0 3px 0;
   line-height:200%;
+}
+
+@media (min-width: 670px) {
+
+  #content{
+    background:none;
+  }
+  body{
+    margin-top: 2rem;  background: linear-gradient(#fff, transparent 90%),
+      linear-gradient(0deg, #fff, transparent),
+      #fff url('http://www.westernrailinc.com/monochrome-railroad-tracks.jpg') no-repeat center;
+      background-size: cover;
+  }
 }
