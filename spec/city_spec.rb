@@ -58,7 +58,7 @@ describe City do
       train2 = Train.new({ id: nil, name: "Ted"})
       train2.save
       @city.update({ train_ids: [train.id, train2.id] })
-      expect(@city.trains).to eq [train, train2]
+      expect(@city.trains).to eq [[train, nil], [train2, nil]]
     end
   end
 
@@ -79,7 +79,7 @@ describe City do
       train2 = Train.new({ id: nil, name: "Ted"})
       train2.save
       @city.update({ train_ids: [train.id, train2.id] })
-      expect(@city.trains).to eq [train, train2]
+      expect(@city.trains).to eq [[train, nil], [train2, nil]]
     end
   end
 

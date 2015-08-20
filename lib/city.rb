@@ -56,12 +56,13 @@ class City
 
   def trains
     city_trains = []
-    results = DB.exec("SELECT train_id FROM trains_cities WHERE city_id = #{self.id}")
+    results = DB.exec("SELECT train_id, arrival_time FROM trains_cities WHERE city_id = #{self.id}")
     results.each do |result|
       train_id = result['train_id'].to_i
       train = DB.exec("SELECT * FROM trains WHERE id = #{train_id}")
+      arrival_time = result['arrival_time']
       name = train.first.fetch('name')
-      city_trains.push(Train.new({ name: name, id: train_id}))
+      city_trains.push([Train.new({ name: name, id: train_id}), arrival_time])
     end
     city_trains
   end

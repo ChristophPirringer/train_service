@@ -3,3 +3,27 @@
 <p>
   we exist
 </p>
+
+<h4>Cities this train stops at</h4>
+
+<% @train.cities.each() do |city|%>
+  <ul>
+    <li><%= city[0].name %>  <%= city[1] %></li>
+  </ul>
+
+<% end %>
+
+<form action="/train_cities" method="post">
+  <div class="form-group">
+    <input type="hidden" name="id" value="<%= @train.id %>">
+    <label for="name">New City Name:</label>
+    <select  name="city_id">
+      <% @cities.each do |city| %>
+        <option value="<%= city.id %>"><%= city.name %></option>
+      <% end %>
+      <input id="basicExample" value='00:00' name="arrival_time" type="text" class="time ui-timepicker-input" data-scroll-default="6:00am" autocomplete="off">
+    </select>
+  </div>
+  <button type='submit'>Submit</button>
+</form>
+<a href="/">back</a>

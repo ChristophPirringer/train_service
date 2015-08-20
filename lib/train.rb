@@ -45,12 +45,15 @@ class Train
 
     @name = attributes[:name]
     #binding.pry
+    @arrival_time = attributes[:arrival_time]
+
 
     DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{self.id};")
 
     attributes.fetch(:city_ids, []).each() do |city_id|
-      DB.exec("INSERT INTO trains_cities (city_id, train_id) VALUES (#{city_id}, #{self.id});")
+      DB.exec("INSERT INTO trains_cities (city_id, train_id, arrival_time) VALUES (#{city_id}, #{self.id}, '#{@arrival_time}');")
     end
+
   end
 
   def destroy
@@ -59,12 +62,13 @@ class Train
 
   def cities
     train_cities = []
-    results = DB.exec("SELECT city_id FROM trains_cities WHERE train_id = #{self.id}")
+    results = DB.exec("SELECT city_id, arrival_time FROM trains_cities WHERE train_id = #{self.id}")
     results.each do |result|
       city_id = result['city_id'].to_i
       city = DB.exec("SELECT * FROM cities WHERE id = #{city_id}")
+      arrival_time = result['arrival_time']
       name = city.first.fetch('name')
-      train_cities.push(City.new({ name: name, id: city_id}))
+      train_cities.push([City.new({ name: name, id: city_id}), arrival_time])
     end
     train_cities
   end

@@ -4,9 +4,10 @@
   we exist
 </p>
 
+<h4>Trains stopping in this city</h4>
 <% @city.trains.each() do |train|%>
   <ul>
-    <li><%= train.name %></li>
+    <li><%= train[0].name %> <%= train[1] %></li>
   </ul>
 
 <% end %>
@@ -19,7 +20,9 @@
       <% @trains.each do |train| %>
         <option value="<%= train.id %>"><%= train.name %></option>
       <% end %>
+      <input id="basicExample" value='00:00' name="arrival_time" type="text" class="time ui-timepicker-input" data-scroll-default="6:00am" autocomplete="off">
     </select>
   </div>
   <button type='submit'>Submit</button>
 </form>
+<a href="/">back</a>

@@ -66,6 +66,7 @@ get '/cities/new' do
 end
 
 get '/train/:id' do
+	@cities = City.all
 	@train = Train.find(params['id'].to_i)
 	erb(:train)
 end
@@ -90,4 +91,10 @@ post '/city_trains' do
   @city = City.find(params['id'].to_i)
 	@city.update({train_ids: [params['train_id']]})
 	redirect("city/#{@city.id}")
+end
+
+post '/train_cities' do
+  @train = Train.find(params['id'].to_i)
+	@train.update({city_ids: [params['city_id']], arrival_time: params['arrival_time']})
+	redirect("train/#{@train.id}")
 end
