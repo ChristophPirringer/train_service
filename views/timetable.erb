@@ -1,0 +1,18 @@
+<h3>All cities in our network:</h3>
+
+<% @cities.each() do |city| %>
+  <ul>
+    <li>
+
+      <h4>Trains stopping in <%= city.name %> </h4>
+      <% city.trains.each() do |train|%>
+        <ul>
+          <li><%= train[0].name %> arriving at <%= train[1] %>   <a href="/ticket/<%= train[0].id%>/<%=city.id %>"><button class='btn-xs btn-primary ticket_button'>Buy Ticket</button></a></li>
+        </ul>
+      <% end %>
+      <br>
+
+    </li>
+  </ul>
+
+<% end %>

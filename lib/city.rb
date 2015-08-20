@@ -10,11 +10,12 @@ class City
 
   def update(attributes)
     @name = attributes.fetch(:name, @name)
+    @arrival_time = attributes[:arrival_time]
 
     DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{self.id};")
 
     attributes.fetch(:train_ids, []).each() do |train_id|
-      DB.exec("INSERT INTO trains_cities (city_id, train_id) VALUES (#{self.id}, #{train_id});")
+      DB.exec("INSERT INTO trains_cities (city_id, train_id, arrival_time) VALUES (#{self.id}, #{train_id}, '#{@arrival_time}');")
     end
   end
 

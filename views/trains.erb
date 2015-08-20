@@ -1,9 +1,9 @@
 
-
+<h4>List of all trains</h4>
 <% if @trains.any? %>
   <ul>
     <% @trains.each do |train| %>
-      <li><a href="/train/<%= train.id %>"><%= train.name %></a> <a href="/train/<%= train.id %>/edit">edit</a></li>
+      <li><a href="/train/<%= train.id %>"><%= train.name %></a><a class = 'editor' href="/train/<%= train.id %>/edit">edit</a></li>
     <% end %>
   </ul>
 <% else %>
@@ -11,6 +11,3 @@
     There are no trains, add one.
   </p>
 <% end %>
-
-<a href="/trains/new">Add Train</a>
-<a href="/">Back</a>

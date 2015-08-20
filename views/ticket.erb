@@ -1,0 +1,9 @@
+<h3>You bought a ticket for the train of <%= @train.name %>, valid from <%= @city.name %> onward.</h3>
+
+<h4>The following stops are also on this route:</h4>
+
+<% @train.cities.each() do |city|%>
+  <ul>
+    <li><%= city[0].name %> at <%= city[1] %></li>
+  </ul>
+<% end %>

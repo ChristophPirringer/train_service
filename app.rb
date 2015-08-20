@@ -89,7 +89,7 @@ end
 
 post '/city_trains' do
   @city = City.find(params['id'].to_i)
-	@city.update({train_ids: [params['train_id']]})
+	@city.update({train_ids: [params['train_id']], arrival_time: params['arrival_time']})
 	redirect("city/#{@city.id}")
 end
 
@@ -97,4 +97,15 @@ post '/train_cities' do
   @train = Train.find(params['id'].to_i)
 	@train.update({city_ids: [params['city_id']], arrival_time: params['arrival_time']})
 	redirect("train/#{@train.id}")
+end
+
+get '/timetable' do
+  @cities = City.all
+	erb(:timetable)
+end
+
+get '/ticket/:id1/:id2' do
+	@train = Train.find(params['id1'].to_i)
+	@city = City.find(params['id2'].to_i)
+	erb(:ticket)
 end

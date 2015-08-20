@@ -1,9 +1,9 @@
-
+<h4>List of all cities</h4>
 
 <% if @cities.any? %>
   <ul>
     <% @cities.each do |city| %>
-      <li><a href="/city/<%= city.id %>"><%= city.name %></a> <a href="/city/<%= city.id %>/edit">edit</a></li>
+      <li><a href="/city/<%= city.id %>"><%= city.name %></a> <a class = 'editor' href="/city/<%= city.id %>/edit">edit</a></li>
     <% end %>
   </ul>
 <% else %>
@@ -11,6 +11,3 @@
     There are no cities, add one.
   </p>
 <% end %>
-
-<a href="/cities/new">Add City</a>
-<a href="/">Back</a>
